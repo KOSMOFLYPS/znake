@@ -160,11 +160,18 @@
         ctx.fillStyle = "#1a1a2e";
         ctx.fillRect(0, 0, W, H);
 
-        // Background text: "I like Lina" in pink
-        ctx.fillStyle = "rgba(255, 192, 203, 0.3)";
-        ctx.font = `bold ${Math.max(40, cs * 3)}px monospace`;
+        // Background text: "I like Lina" in bright pink with shadow
+        const fontSize = Math.max(40, cs * 3);
+        ctx.font = `bold ${fontSize}px monospace`;
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
+        
+        // Draw dark shadow for contrast
+        ctx.fillStyle = "rgba(0, 0, 0, 0.6)";
+        ctx.fillText("I like Lina", W / 2 + 2, H / 2 + 2);
+        
+        // Draw bright pink text on top
+        ctx.fillStyle = "#ff1493";
         ctx.fillText("I like Lina", W / 2, H / 2);
 
         // Grid lines
@@ -549,7 +556,7 @@
       Renderer.init(canvas, gameState);
       Score_Tracker.init(gameState);
       Game_Loop.init(gameState, Renderer, Score_Tracker);
-      Input_Handler.init(gameState, Game_Loop);
+      Input_Handler.init(gameState, gameLoop);
 
       // Show start screen while all components are stubs
       Renderer.drawStartScreen(gameState);
