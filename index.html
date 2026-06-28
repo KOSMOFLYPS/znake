@@ -160,19 +160,30 @@
         ctx.fillStyle = "#1a1a2e";
         ctx.fillRect(0, 0, W, H);
 
-        // Background text: "Marco likes Lina allot!" in bright pink with shadow
-        const fontSize = Math.max(40, cs * 3);
+        // Background text: Multi-line text with smaller font
+        const fontSize = Math.max(20, cs * 1.5);
         ctx.font = `bold ${fontSize}px monospace`;
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
         
-        // Draw dark shadow for contrast
-        ctx.fillStyle = "rgba(0, 0, 0, 0.6)";
-        ctx.fillText("Marco likes Lina allot!", W / 2 + 2, H / 2 + 2);
+        // Text lines
+        const lines = ["Marco Likes", "Lina allot!"];
+        const lineHeight = fontSize + 10;
+        const totalHeight = (lines.length - 1) * lineHeight;
+        const startY = H / 2 - totalHeight / 2;
         
-        // Draw bright pink text on top
-        ctx.fillStyle = "#ff1493";
-        ctx.fillText("Marco likes Lina allot!", W / 2, H / 2);
+        // Draw each line with shadow and pink color
+        lines.forEach((line, index) => {
+          const y = startY + index * lineHeight;
+          
+          // Draw dark shadow for contrast
+          ctx.fillStyle = "rgba(0, 0, 0, 0.6)";
+          ctx.fillText(line, W / 2 + 2, y + 2);
+          
+          // Draw bright pink text on top
+          ctx.fillStyle = "#ff1493";
+          ctx.fillText(line, W / 2, y);
+        });
 
         // Grid lines
         ctx.strokeStyle = "#2a2a4e";
